@@ -1,5 +1,7 @@
 library(dplyr)
 library(stats)
+library(pastecs)
+library(Hmisc)
 marketing_campaign_data <- read.csv("C:\\Users\\amylo\\marketing_campaign.csv", sep="\t",
                                     stringsAsFactors = FALSE)
 
@@ -65,6 +67,43 @@ Outlier_TotalSpending <- boxplot(marketing_campaign_data$Total_Spending, plot=FA
 clean_data <- subset(marketing_campaign_data, !(Income %in% Outlier_Income))
 clean_data <- subset(clean_data, !(Age %in% Outlier_Age))
 clean_data <- subset(clean_data, !(Total_Spending %in% Outlier_TotalSpending))
+
+# Conducting Chi-Square test
+# Problem 1
+# Null Hypotheses - There is no association/relation between the Education of a customer 
+# and whether the customer accepts the offer in first campaign or not
+# Alternate Hypotheses - There is some association/relation between the Education of a customer 
+# and whether the customer accepts the offer in first campaign or not
+contingency_table <- table(clean_data$Education, clean_data$AcceptedCmp1)
+chisq.test(contingency_table)
+
+# As the p-value is greater than the level of significance - 5%, we do not reject the Null Hypotheses
+# Hence, we can conclude that there is weak or no association between the education of a customer and 
+# whether the customer accepts the offer in first campaign or not
+
+# Problem 2
+# Null Hypotheses - There is no association/relation between the marital status of a customer 
+# and whether the customer accepts the offer in first campaign or not
+# Alternate Hypotheses - There is some association/relation between the marital status of a customer 
+# and whether the customer accepts the offer in first campaign or not
+contingency_table2 <- table(clean_data$Marital_Status, clean_data$AcceptedCmp1)
+chisq.test(contingency_table2)
+
+# As the p-value is greater than the level of significance - 5%, we do not reject the Null Hypotheses
+# Hence, we can conclude that there is weak or no association between the marital status of a customer and 
+# whether the customer accepts the offer in first campaign or not
+
+# Problem 3
+# Null Hypotheses - There is no association/relation between whether the customer has a child or not 
+# and whether the customer accepts the offer in first campaign or not
+# Alternate Hypotheses - There is some association/relation between whether the customer has a child or not 
+# and whether the customer accepts the offer in first campaign or not
+contingency_table3 <- table(clean_data$Has_Child, clean_data$AcceptedCmp1)
+chisq.test(contingency_table3)
+
+# As the p-value is significantly lesser than the level of significance - 5%, we reject the Null Hypotheses
+# Hence, we can conclude that there is some association between the customer has a child or not and 
+# whether the customer accepts the offer in first campaign or not
 
 # Exporting clean data for further statistical analysis
 write.csv(clean_data, "C:\\Users\\amylo\\marketing_clean_data.csv")
