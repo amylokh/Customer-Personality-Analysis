@@ -48,7 +48,7 @@ marketing_campaign_data$Total_Children = marketing_campaign_data$Teenhome + mark
 # Generating new categorical variable called Has_Child which means whether the customer has a child or not
 marketing_campaign_data$Has_Child = ifelse(marketing_campaign_data$Total_Children > 0,"Yes", "No")
 
-# Finding number of outliers in each scaled variable
+# Finding outliers in each scaled variable
 Outlier_Income <- boxplot(marketing_campaign_data$Income, plot=FALSE)$out
 Outlier_Recency <- boxplot(marketing_campaign_data$Recency, plot=FALSE)$out
 Outlier_MntWines <- boxplot(marketing_campaign_data$MntWines, plot=FALSE)$out
@@ -104,6 +104,10 @@ chisq.test(contingency_table3)
 # As the p-value is significantly lesser than the level of significance - 5%, we reject the Null Hypotheses
 # Hence, we can conclude that there is some association between the customer has a child or not and 
 # whether the customer accepts the offer in first campaign or not
+
+# Drawing histogram
+ggplot(clean_data, aes(x=Income)) + geom_density()
+ggplot(clean_data, aes(x=Total_Spending)) + geom_density()
 
 # Exporting clean data for further statistical analysis
 write.csv(clean_data, "C:\\Users\\amylo\\marketing_clean_data.csv")
