@@ -220,3 +220,23 @@ summary(one.way)
 # We reject the null hypothesis.
 #-------------------------------------------------------------------------------------------------------------------------
 
+
+# Correlation
+View(marketing_clean_data_csv)
+
+# Problem 1
+# Null Hypothesis - Income is not correlated with the total spending of a customer.
+# Alternate Hypothesis - Income is correlated with the total spending of a customer.
+cor.test(marketing_clean_data_csv$Income,marketing_clean_data_csv$Total_Spending)
+
+# Problem 2
+# Null Hypothesis - Income is not correlated with the Number of visits per month of a customer
+# Alternate Hypothesis - Income is correlated with the number of visits per month of a customer
+cor.test(marketing_clean_data_csv$Income,marketing_clean_data_csv$NumWebVisitsMonth)
+
+# Problem 3
+# Null Hypothesis - The number of store purchases by a customer is not correlated with the total spending of a customer
+# Alternative Hypothesis - The number of store purchases by a customer is correlated with the total spending of a customer
+cor.test(marketing_clean_data_csv$NumStorePurchases,marketing_clean_data_csv$Total_Spending)
+
+
